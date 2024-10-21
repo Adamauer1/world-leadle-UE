@@ -1,0 +1,94 @@
+.backgroundStaticImageContainer {
+  position: fixed;
+  z-index: -101;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  transform: scale(1, 1);
+}
+
+.activeBackgroundImageContainer {
+  position: fixed;
+  z-index: -100;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  animation: zoom-in-zoom-out 15s;
+}
+
+@keyframes zoom-in-zoom-out {
+  0% {
+    transform: scale(1, 1);
+  }
+  50% {
+    transform: scale(1.5, 1.5);
+  }
+  100% {
+    transform: scale(1, 1);
+  }
+}
+
+.backgroundImage {
+  filter: brightness(0.65);
+  height: 100vh;
+}
+
+.button {
+  padding: 17px 40px;
+  border-radius: 50px;
+  width: 10rem;
+  text-align: center;
+  cursor: pointer;
+  border: 0;
+  background-color: var(--mantine-color-teal-filled);
+  box-shadow: rgb(0 0 0 / 5%) 0 0 8px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  font-size: 15px;
+  transition: all 0.5s ease;
+}
+
+.button:hover {
+  letter-spacing: 3px;
+  /* background-color: var(--mantine-primary-color-filled-hover); */
+  background-color: var(--mantine-color-teal-filled-hover);
+  box-shadow: var(--mantine-shadow-xl);
+}
+
+.button:active {
+  letter-spacing: 3px;
+  box-shadow: var(--mantine-shadow-sm);
+  transform: translateY(5px);
+  transition: 100ms;
+}
+
+.accordionRoot {
+  background-color: var(--mantine-color-body);
+}
+
+/* 576px xs*/
+@media screen and (min-width: 36em) {
+}
+/* 768px sm*/
+@media screen and (min-width: 48em) {
+  .backgroundImage {
+    height: auto;
+  }
+}
+/* 992px md*/
+@media screen and (min-width: 62em) {
+}
+/* 1200px lg*/
+@media screen and (min-width: 75em) {
+  .button {
+    width: 20rem;
+    padding: 17px 40px;
+  }
+
+  .backgroundImage {
+    height: auto;
+  }
+}
+/* 1408px xl*/
+@media screen and (min-width: 88em) {
+}
