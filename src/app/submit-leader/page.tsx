@@ -11,6 +11,7 @@ import {
   TextInput,
   Group,
   Button,
+  Text,
 } from "@mantine/core";
 import { useEffect, useReducer, useRef, useState } from "react";
 import { checkCentury, Leader } from "@/lib/utils";
@@ -23,6 +24,7 @@ import { useForm } from "@mantine/form";
 
 export default function SubmitLeader() {
   const [isLoading, setIsLoading] = useState(false);
+  const [previewValues, setPreviewValues] = useState<formValues>();
   const form = useForm({
     mode: "uncontrolled",
     initialValues: {
@@ -36,20 +38,22 @@ export default function SubmitLeader() {
     },
 
     validate: {
-      name: (value) => (value.length != 0 ? null : "Wymagane imię i nazwisko"),
-      title: (value) => (value.length != 0 ? null : "Wymagane imię i nazwisko"),
-      country: (value) =>
-        value.length != 0 ? null : "Wymagane imię i nazwisko",
-      region: (value) =>
-        value.length != 0 ? null : "Wymagane imię i nazwisko",
-      century: (value) =>
-        value.length != 0 ? null : "Wymagane imię i nazwisko",
-      imageLink: (value) =>
-        value.length != 0 ? null : "Wymagane imię i nazwisko",
+      name: (value) => (value.length != 0 ? null : "Required Full Name"),
+      title: (value) => (value.length != 0 ? null : "Required Title"),
+      country: (value) => (value.length != 0 ? null : "Required Country"),
+      region: (value) => (value.length != 0 ? null : "Required Region"),
+      century: (value) => (value.length != 0 ? null : "Required Century"),
+      imageLink: (value) => (value.length != 0 ? null : "Required Image Link"),
       wikiLink: (value) =>
-        value.length != 0 ? null : "Wymagane imię i nazwisko",
+        value.length != 0 ? null : "Required Wikipedia Link",
+    },
+
+    onValuesChange: (values) => {
+      setPreviewValues(values);
     },
   });
+
+  type formValues = typeof form.values;
 
   const handleSubmit = (value: any) => {
     console.log("successful submittion");
@@ -63,13 +67,41 @@ export default function SubmitLeader() {
         </Center>
       ) : (
         <Flex
-          direction={{ base: "column" }}
+          direction={{ base: "column", sm: "row" }}
           justify={"center"}
           align={"center"}
           flex={1}
           pt={{ lg: rem(60) }}
           w={"100%"}
         >
+          {/* <LeaderFrame
+            name={
+              previewValues?.name == undefined
+                ? "George Washington"
+                : previewValues.name
+            }
+            title={
+              previewValues?.title == undefined
+                ? "President"
+                : previewValues.title
+            }
+            country={
+              previewValues?.country == undefined
+                ? "United States of America"
+                : previewValues.country
+            }
+            image={
+              previewValues?.imageLink == undefined
+                ? "https://upload.wikimedia.org/wikipedia/commons/b/b6/Gilbert_Stuart_Williamstown_Portrait_of_George_Washington.jpg"
+                : previewValues.imageLink
+            }
+            link={
+              previewValues?.wikiLink == undefined
+                ? "https://en.wikipedia.org/wiki/George_Washington"
+                : previewValues.wikiLink
+            }
+            gameOver={true}
+          /> */}
           <Flex direction={"column"} w={rem(600)}>
             <form onSubmit={form.onSubmit(handleSubmit)}>
               <TextInput

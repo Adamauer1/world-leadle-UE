@@ -79,8 +79,8 @@ export default function Home() {
           w={{ base: rem(250), sm: rem(600), lg: rem(800) }}
         >
           <Flex
-            direction={{ base: "column", sm: "row" }}
-            gap={{ base: rem(20), sm: 0 }}
+            direction={{ base: "column" }}
+            gap={{ base: rem(20) }}
             w={"100%"}
             justify={{ base: "space-between", sm: "space-evenly" }}
             align={{ base: "center" }}
@@ -98,6 +98,13 @@ export default function Home() {
               className={styles.button}
             >
               FreePlay
+            </UnstyledButton>
+            <UnstyledButton
+              component={Link}
+              href={"/submit-leader"}
+              className={styles.button}
+            >
+              Submit A Leader
             </UnstyledButton>
           </Flex>
           <Accordion classNames={{ root: styles.accordionRoot }} w={"100%"}>
