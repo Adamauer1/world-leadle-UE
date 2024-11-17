@@ -1,6 +1,7 @@
 "use client";
 import NextImage from "next/image";
 import styles from "@/app/submit-leader/page.module.css";
+import { notifications } from "@mantine/notifications";
 import { scroller } from "react-scroll";
 import {
   Flex,
@@ -24,7 +25,7 @@ import { useForm } from "@mantine/form";
 
 export default function SubmitLeader() {
   const [isLoading, setIsLoading] = useState(false);
-  const [previewValues, setPreviewValues] = useState<formValues>();
+  //const [previewValues, setPreviewValues] = useState<formValues>();
   const form = useForm({
     mode: "uncontrolled",
     initialValues: {
@@ -48,15 +49,27 @@ export default function SubmitLeader() {
         value.length != 0 ? null : "Required Wikipedia Link",
     },
 
-    onValuesChange: (values) => {
-      setPreviewValues(values);
-    },
+    // onValuesChange: (values) => {
+    //   // setPreviewValues(values);
+    // },
   });
 
   type formValues = typeof form.values;
 
-  const handleSubmit = (value: any) => {
-    console.log("successful submittion");
+  const handleSubmit = async (value: any) => {
+    notifications.show({
+      title: "Success",
+      message: "Leader Submitted",
+      color: "green",
+      position: "top-center",
+      styles: {
+        root: { backgroundColor: "green" },
+        description: { color: "white" },
+        title: { color: "white" },
+      },
+    });
+    console.log("successful submission");
+    form.reset();
   };
 
   return (
@@ -102,7 +115,10 @@ export default function SubmitLeader() {
             }
             gameOver={true}
           /> */}
-          <Flex direction={"column"} w={rem(600)}>
+          <Flex
+            direction={"column"}
+            w={{ base: "90%", xs: rem(500), md: rem(700) }}
+          >
             <form onSubmit={form.onSubmit(handleSubmit)}>
               <TextInput
                 label="Name"

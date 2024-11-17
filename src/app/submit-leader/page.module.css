@@ -2,6 +2,7 @@
   /* background-color: var(--mantine-color-white);
   border-color: var(--mantine-color-gray-4);
   color: var(--mantine-color-black); */
+  /* width: 100%; */
 
   &::placeholder {
     color: var(--mantine-color-gray-5);

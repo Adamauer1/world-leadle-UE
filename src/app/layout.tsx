@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { Notifications } from "@mantine/notifications";
+import "@mantine/notifications/styles.css";
 import "./globals.css";
 import "@mantine/core/styles.css";
 
@@ -36,6 +38,7 @@ export default function RootLayout({
             <AppShell
               header={{ height: { base: 40, xs: 50, md: 60, lg: 70, xl: 70 } }}
             >
+              <Notifications />
               <AppShellHeader>
                 <Header />
               </AppShellHeader>
