@@ -234,6 +234,7 @@ export default function Daily() {
               gameOver={gameOver}
               // barData={loadAchievementData().daily}
               data={loadAchievementData().daily}
+              marginTop={rem(80)}
             />
             {/* <PieChart
               mt={rem(80)}

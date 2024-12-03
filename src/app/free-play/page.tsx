@@ -321,6 +321,7 @@ export default function FreePlay() {
             <Achievement
               gameOver={gameOver}
               data={loadAchievementData().freePlay}
+              marginTop={rem(80)}
               // barData={loadAchievementData().freePlay}
               // pieData={loadAchievementData().freePlay}
             />

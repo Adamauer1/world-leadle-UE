@@ -10,7 +10,7 @@ import {
   Text,
   UnstyledButton,
 } from "@mantine/core";
-import React from "react";
+import React, { useState } from "react";
 const data = leaders;
 const leaderSearchList = data.map((leader) => leader.nameSearch).sort();
 
@@ -30,14 +30,18 @@ export default function SearchInput({
   gameOver: boolean;
 }) {
   const { isHardMode } = useHardMode();
+  const [searchData, setSearchData] = useState(leaderSearchList);
+
+  const handleFilterData = () => {};
 
   return (
     <>
-      {/* <Flex w={"100%"} justify={"center"} gap={}> */}
+      {/* <Flex w={"100%"} justify={"center"} gap={rem(4)}> */}
       <Autocomplete
         w={{ base: "95%", lg: "70%" }}
         size="lg"
-        data={isHardMode ? [] : leaderSearchList}
+        // data={isHardMode ? [] : leaderSearchList}
+        data={searchData}
         error={errorMessage}
         rightSection={
           <>
@@ -66,8 +70,29 @@ export default function SearchInput({
           },
         }}
       />
-      {/* <Text>Test</Text>
-      </Flex> */}
+      {/* <ActionIcon
+          //onClick={handleFilterData}
+          onClick={() => {
+            setSearchData(handleFilterData());
+          }}
+          variant="filled"
+          color="#7cc1d8"
+          classNames={{
+            root: styles.actionIconRoot,
+            icon: styles.actionIconIcon,
+          }}
+          styles={{
+            root: {
+              borderTopRightRadius: 30,
+              borderBottomRightRadius: 30,
+            },
+          }}
+        > */}
+      {/* <IconSearch size={36} /> */}
+      {/* <IconSearch /> */}
+      {/* </ActionIcon> */}
+      {/* <Text>Test</Text> */}
+      {/* </Flex> */}
     </>
   );
 }
