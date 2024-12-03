@@ -125,7 +125,7 @@ export default function Daily() {
 
       setCurrentGuess("");
       let achievements = loadAchievementData().daily;
-      achievements.game += 1;
+      achievements.games += 1;
       achievements.wins += 1;
       switch (5 - guessesRemaining + 1) {
         case 1: {
@@ -163,7 +163,7 @@ export default function Daily() {
         offset: -50,
       });
       let achievements = loadAchievementData().daily;
-      achievements.game += 1;
+      achievements.games += 1;
       saveAchievementsData(achievements, loadAchievementData().freePlay);
     }
     saveUserData(userData.date, guesses, isGameOver);
@@ -232,8 +232,8 @@ export default function Daily() {
             {displayGuessResultsRow()}
             <Achievement
               gameOver={gameOver}
-              barData={loadAchievementData().daily}
-              pieData={loadAchievementData().daily}
+              // barData={loadAchievementData().daily}
+              data={loadAchievementData().daily}
             />
             {/* <PieChart
               mt={rem(80)}

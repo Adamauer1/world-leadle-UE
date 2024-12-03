@@ -14,15 +14,23 @@ import { BarChart, PieChart } from "@mantine/charts";
 // ];
 export default function Achievement({
   gameOver,
-  barData,
-  pieData,
+  data,
 }: {
   gameOver: boolean;
-  barData: any;
-  pieData: any;
+  data: any;
 }) {
   const { colorScheme } = useMantineColorScheme();
-
+  const barData = [
+    { numberOfGuesses: "1", Games: data.guessOne },
+    { numberOfGuesses: "2", Games: data.guessTwo },
+    { numberOfGuesses: "3", Games: data.guessThree },
+    { numberOfGuesses: "4", Games: data.guessFour },
+    { numberOfGuesses: "5", Games: data.guessFive },
+  ];
+  const pieData = [
+    { name: "Wins", value: data.wins, color: "green.6" },
+    { name: "Loses", value: data.games - data.wins, color: "red.6" },
+  ];
   return (
     <>
       {gameOver ? (

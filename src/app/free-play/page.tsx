@@ -151,7 +151,7 @@ export default function FreePlay() {
 
       setCurrentGuess("");
       let achievements = loadAchievementData().freePlay;
-      achievements.game += 1;
+      achievements.games += 1;
       achievements.wins += 1;
       switch (5 - gameState.guessesRemaining + 1) {
         case 1: {
@@ -191,7 +191,7 @@ export default function FreePlay() {
     });
     if (isGameOver) {
       let achievements = loadAchievementData().freePlay;
-      achievements.game += 1;
+      achievements.games += 1;
       saveAchievementsData(loadAchievementData().freePlay, achievements);
     }
     setGameOver(isGameOver);
@@ -320,8 +320,9 @@ export default function FreePlay() {
             </UnstyledButton>
             <Achievement
               gameOver={gameOver}
-              barData={loadAchievementData().freePlay}
-              pieData={loadAchievementData().freePlay}
+              data={loadAchievementData().freePlay}
+              // barData={loadAchievementData().freePlay}
+              // pieData={loadAchievementData().freePlay}
             />
           </Flex>
         </Flex>
