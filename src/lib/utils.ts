@@ -63,7 +63,26 @@ export const saveUserData = (
 
 export const loadAchievementData = () => {
   if (localStorage.getItem("achievements") == null) {
-    //saveAchievementsData()
+    saveAchievementsData(
+      {
+        games: 0,
+        wins: 0,
+        guessOne: 0,
+        guessTwo: 0,
+        guessThree: 0,
+        guessFour: 0,
+        guessFive: 0,
+      },
+      {
+        games: 0,
+        wins: 0,
+        guessOne: 0,
+        guessTwo: 0,
+        guessThree: 0,
+        guessFour: 0,
+        guessFive: 0,
+      }
+    );
   }
   const { daily, freePlay } = JSON.parse(
     localStorage.getItem("achievements") ?? "{}"

@@ -5,7 +5,12 @@ import styles from "@/app/free-play/page.module.css";
 import { scroller } from "react-scroll";
 import { Flex, rem, UnstyledButton, Center, Loader } from "@mantine/core";
 import { useEffect, useReducer, useRef, useState } from "react";
-import { checkCentury, Leader, loadAchievementData } from "@/lib/utils";
+import {
+  checkCentury,
+  Leader,
+  loadAchievementData,
+  saveAchievementsData,
+} from "@/lib/utils";
 import { leaders } from "@/lib/data";
 import SearchInput from "@/components/ui/SearchInput";
 import LeaderFrame from "@/components/ui/LeaderFrame";
@@ -145,6 +150,32 @@ export default function FreePlay() {
       });
 
       setCurrentGuess("");
+      let achievements = loadAchievementData().freePlay;
+      achievements.game += 1;
+      achievements.wins += 1;
+      switch (5 - gameState.guessesRemaining + 1) {
+        case 1: {
+          achievements.guessOne += 1;
+          break;
+        }
+        case 2: {
+          achievements.guessTwo += 1;
+          break;
+        }
+        case 3: {
+          achievements.guessThree += 1;
+          break;
+        }
+        case 4: {
+          achievements.guessFour += 1;
+          break;
+        }
+        case 5: {
+          achievements.guessFive += 1;
+          break;
+        }
+      }
+      saveAchievementsData(loadAchievementData().daily, achievements);
       return;
     }
 
@@ -158,6 +189,11 @@ export default function FreePlay() {
       type: "incrementGuesses",
       payload: gameState.guessesRemaining - 1,
     });
+    if (isGameOver) {
+      let achievements = loadAchievementData().freePlay;
+      achievements.game += 1;
+      saveAchievementsData(loadAchievementData().freePlay, achievements);
+    }
     setGameOver(isGameOver);
     setCurrentGuess("");
     setTimeout(() => {
