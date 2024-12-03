@@ -16,6 +16,7 @@ import { useEffect, useRef, useState } from "react";
 import { leaders, frontPageLeaders } from "@/lib/data";
 import { deleteOldLocalData } from "@/lib/utils";
 import React from "react";
+import NewUserModule from "@/components/ui/NewUser";
 var seedrandom = require("seedrandom");
 
 //const data = leaders.map((leader) => leader.image);
@@ -68,6 +69,7 @@ export default function Home() {
   }, [key, currentImageIndex]);
   return (
     <>
+      <NewUserModule />
       <Center
         pt={{ base: rem(100), xl: rem(300) }}
         styles={{ root: { zIndex: 10 } }}
