@@ -175,6 +175,7 @@ export default function Daily() {
             country={answer.nationality}
             image={answer.image}
             link={answer.wikiLink}
+            guessNumber={5 - guessesRemaining}
             gameOver={gameOver}
           />
 

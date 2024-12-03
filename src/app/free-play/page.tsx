@@ -251,6 +251,7 @@ export default function FreePlay() {
             country={gameState.answer.nationality}
             image={gameState.answer.image}
             link={gameState.answer.wikiLink}
+            guessNumber={5 - gameState.guessesRemaining}
             gameOver={gameOver}
           />
           <Flex
