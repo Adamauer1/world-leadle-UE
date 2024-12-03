@@ -20,10 +20,10 @@ export default function LeaderFrame({
 }) {
   let showTitle = false;
   let showCountry = false;
-  if (guessNumber >= 4) {
+  if (guessNumber >= 4 || gameOver) {
     showTitle = true;
   }
-  if (guessNumber >= 3) {
+  if (guessNumber >= 3 || gameOver) {
     showCountry = true;
   }
 
