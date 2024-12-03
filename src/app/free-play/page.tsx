@@ -5,12 +5,13 @@ import styles from "@/app/free-play/page.module.css";
 import { scroller } from "react-scroll";
 import { Flex, rem, UnstyledButton, Center, Loader } from "@mantine/core";
 import { useEffect, useReducer, useRef, useState } from "react";
-import { checkCentury, Leader } from "@/lib/utils";
+import { checkCentury, Leader, loadAchievementData } from "@/lib/utils";
 import { leaders } from "@/lib/data";
 import SearchInput from "@/components/ui/SearchInput";
 import LeaderFrame from "@/components/ui/LeaderFrame";
 import GuessRow from "@/components/ui/GuessRow";
 import React from "react";
+import Achievement from "@/components/ui/Achievement";
 
 const data = leaders;
 
@@ -281,6 +282,11 @@ export default function FreePlay() {
             >
               Play Again
             </UnstyledButton>
+            <Achievement
+              gameOver={gameOver}
+              barData={loadAchievementData().freePlay}
+              pieData={loadAchievementData().freePlay}
+            />
           </Flex>
         </Flex>
       )}

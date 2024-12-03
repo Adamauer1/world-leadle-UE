@@ -49,6 +49,7 @@ export const loadLocalData = () => {
     gameOver: gameOver,
   };
 };
+
 export const saveUserData = (
   date: string,
   guesses: Leader[],
@@ -57,6 +58,42 @@ export const saveUserData = (
   localStorage.setItem(
     "daily",
     JSON.stringify({ date: date, guesses: guesses, gameOver })
+  );
+};
+
+export const loadAchievementData = () => {
+  if (localStorage.getItem("achievements") == null) {
+    //saveAchievementsData()
+  }
+  const { daily, freePlay } = JSON.parse(
+    localStorage.getItem("achievements") ?? "{}"
+  );
+  return { daily: daily, freePlay: freePlay };
+};
+
+export const saveAchievementsData = (
+  daily: {
+    games: number;
+    wins: number;
+    guessOne: number;
+    guessTwo: number;
+    guessThree: number;
+    guessFour: number;
+    guessFive: number;
+  },
+  freePlay: {
+    games: number;
+    wins: number;
+    guessOne: number;
+    guessTwo: number;
+    guessThree: number;
+    guessFour: number;
+    guessFive: number;
+  }
+) => {
+  localStorage.setItem(
+    "achievements",
+    JSON.stringify({ daily: daily, freePlay: freePlay })
   );
 };
 
