@@ -44,7 +44,11 @@ export default function LeaderFrame({
           // h={{ base: 350 }}
           p={0}
         >
-          <Image alt="" src={image} />
+          <Image
+            alt=""
+            src={image}
+            fallbackSrc="https://placehold.co/600x400?text=Placeholder"
+          />
         </Container>
         <Flex
           direction={"column"}

@@ -12,6 +12,8 @@ import {
   Group,
   Button,
   Text,
+  Container,
+  Image,
 } from "@mantine/core";
 import { useEffect, useReducer, useRef, useState } from "react";
 import { checkCentury, Leader } from "@/lib/utils";
@@ -56,9 +58,16 @@ export default function SubmitLeader() {
   type formValues = typeof form.values;
 
   const handleSubmit = (value: any) => {
-    console.log("successful submittion");
+    console.log("successful submission");
   };
 
+  let leader = {
+    name: previewValues?.name,
+    title: previewValues?.title,
+    nationality: previewValues?.country,
+    continent: previewValues?.region,
+    century: previewValues?.century,
+  };
   return (
     <>
       {isLoading ? (
@@ -68,40 +77,50 @@ export default function SubmitLeader() {
       ) : (
         <Flex
           direction={{ base: "column", sm: "row" }}
-          justify={"center"}
+          justify={"space-around"}
           align={"center"}
           flex={1}
           pt={{ lg: rem(60) }}
           w={"100%"}
         >
-          {/* <LeaderFrame
-            name={
-              previewValues?.name == undefined
-                ? "George Washington"
-                : previewValues.name
-            }
-            title={
-              previewValues?.title == undefined
-                ? "President"
-                : previewValues.title
-            }
-            country={
-              previewValues?.country == undefined
-                ? "United States of America"
-                : previewValues.country
-            }
-            image={
-              previewValues?.imageLink == undefined
-                ? "https://upload.wikimedia.org/wikipedia/commons/b/b6/Gilbert_Stuart_Williamstown_Portrait_of_George_Washington.jpg"
-                : previewValues.imageLink
-            }
-            link={
-              previewValues?.wikiLink == undefined
-                ? "https://en.wikipedia.org/wiki/George_Washington"
-                : previewValues.wikiLink
-            }
-            gameOver={true}
-          /> */}
+          <Flex direction={"column"}>
+            <LeaderFrame
+              name={
+                previewValues?.name == undefined
+                  ? "George Washington"
+                  : previewValues.name
+              }
+              title={
+                previewValues?.title == undefined
+                  ? "President"
+                  : previewValues.title
+              }
+              country={
+                previewValues?.country == undefined
+                  ? "United States of America"
+                  : previewValues.country
+              }
+              image={
+                previewValues?.imageLink == undefined
+                  ? "https://upload.wikimedia.org/wikipedia/commons/b/b6/Gilbert_Stuart_Williamstown_Portrait_of_George_Washington.jpg"
+                  : previewValues.imageLink
+              }
+              link={
+                previewValues?.wikiLink == undefined
+                  ? "https://en.wikipedia.org/wiki/George_Washington"
+                  : previewValues.wikiLink
+              }
+              guessNumber={5}
+              gameOver={true}
+            />
+            <GuessRow
+              id={"1"}
+              key={1}
+              leader={leader}
+              answer={leader}
+              centuries={["green", "\u{02713}"]}
+            />
+          </Flex>
           <Flex direction={"column"} w={rem(600)}>
             <form onSubmit={form.onSubmit(handleSubmit)}>
               <TextInput
