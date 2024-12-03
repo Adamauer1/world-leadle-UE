@@ -7,6 +7,7 @@ export default function LeaderFrame({
   country,
   image,
   link,
+  guessNumber,
   gameOver,
 }: {
   name: string;
@@ -14,8 +15,19 @@ export default function LeaderFrame({
   image: string;
   link: string;
   country: string;
+  guessNumber: number;
   gameOver: boolean;
 }) {
+  let showTitle = false;
+  let showCountry = false;
+  if (guessNumber >= 4) {
+    showTitle = true;
+  }
+  if (guessNumber >= 3) {
+    showCountry = true;
+  }
+
+  console.log(showTitle);
   return (
     <>
       <Flex
@@ -32,7 +44,11 @@ export default function LeaderFrame({
           // h={{ base: 350 }}
           p={0}
         >
-          <Image alt="" src={image} />
+          <Image
+            alt=""
+            src={image}
+            fallbackSrc="https://placehold.co/600x400?text=Placeholder"
+          />
         </Container>
         <Flex
           direction={"column"}
@@ -40,10 +56,15 @@ export default function LeaderFrame({
           align={{ base: "center" }}
           id="endGame"
         >
-          <Title order={2} hidden={!gameOver}>
-            {`${title} ${name}`}
-          </Title>
-          <Text hidden={!gameOver}>{`of ${country}`}</Text>
+          <Flex direction={"row"} gap={rem(8)}>
+            <Title order={2} hidden={!showTitle}>
+              {`${title}`}
+            </Title>
+            <Title order={2} hidden={!gameOver}>
+              {` ${name}`}
+            </Title>
+          </Flex>
+          <Text hidden={!showCountry}>{`of ${country}`}</Text>
           <Text
             component="a"
             href={link}

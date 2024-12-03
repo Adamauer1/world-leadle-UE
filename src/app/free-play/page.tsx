@@ -5,12 +5,18 @@ import styles from "@/app/free-play/page.module.css";
 import { scroller } from "react-scroll";
 import { Flex, rem, UnstyledButton, Center, Loader } from "@mantine/core";
 import { useEffect, useReducer, useRef, useState } from "react";
-import { checkCentury, Leader } from "@/lib/utils";
+import {
+  checkCentury,
+  Leader,
+  loadAchievementData,
+  saveAchievementsData,
+} from "@/lib/utils";
 import { leaders } from "@/lib/data";
 import SearchInput from "@/components/ui/SearchInput";
 import LeaderFrame from "@/components/ui/LeaderFrame";
 import GuessRow from "@/components/ui/GuessRow";
 import React from "react";
+import Achievement from "@/components/ui/Achievement";
 
 const data = leaders;
 
@@ -144,6 +150,32 @@ export default function FreePlay() {
       });
 
       setCurrentGuess("");
+      let achievements = loadAchievementData().freePlay;
+      achievements.games += 1;
+      achievements.wins += 1;
+      switch (5 - gameState.guessesRemaining + 1) {
+        case 1: {
+          achievements.guessOne += 1;
+          break;
+        }
+        case 2: {
+          achievements.guessTwo += 1;
+          break;
+        }
+        case 3: {
+          achievements.guessThree += 1;
+          break;
+        }
+        case 4: {
+          achievements.guessFour += 1;
+          break;
+        }
+        case 5: {
+          achievements.guessFive += 1;
+          break;
+        }
+      }
+      saveAchievementsData(loadAchievementData().daily, achievements);
       return;
     }
 
@@ -157,6 +189,11 @@ export default function FreePlay() {
       type: "incrementGuesses",
       payload: gameState.guessesRemaining - 1,
     });
+    if (isGameOver) {
+      let achievements = loadAchievementData().freePlay;
+      achievements.games += 1;
+      saveAchievementsData(loadAchievementData().freePlay, achievements);
+    }
     setGameOver(isGameOver);
     setCurrentGuess("");
     setTimeout(() => {
@@ -251,6 +288,7 @@ export default function FreePlay() {
             country={gameState.answer.nationality}
             image={gameState.answer.image}
             link={gameState.answer.wikiLink}
+            guessNumber={5 - gameState.guessesRemaining}
             gameOver={gameOver}
           />
           <Flex
@@ -266,6 +304,7 @@ export default function FreePlay() {
               setCurrentGuess={handleInputChange}
               handleGuess={handleGuess}
               errorMessage={errorMessage}
+              guessNumber={5 - gameState.guessesRemaining}
               gameOver={gameOver}
             />
 
@@ -279,6 +318,13 @@ export default function FreePlay() {
             >
               Play Again
             </UnstyledButton>
+            <Achievement
+              gameOver={gameOver}
+              data={loadAchievementData().freePlay}
+              marginTop={rem(80)}
+              // barData={loadAchievementData().freePlay}
+              // pieData={loadAchievementData().freePlay}
+            />
           </Flex>
         </Flex>
       )}

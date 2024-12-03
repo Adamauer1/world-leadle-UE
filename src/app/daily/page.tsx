@@ -10,6 +10,8 @@ import {
   Leader,
   saveUserData,
   checkCentury,
+  loadAchievementData,
+  saveAchievementsData,
 } from "@/lib/utils";
 import { leaders } from "@/lib/data";
 import { IconSearch } from "@tabler/icons-react";
@@ -17,6 +19,8 @@ import SearchInput from "@/components/ui/SearchInput";
 import LeaderFrame from "@/components/ui/LeaderFrame";
 import GuessRow from "@/components/ui/GuessRow";
 import React from "react";
+import { BarChart, PieChart } from "@mantine/charts";
+import Achievement from "@/components/ui/Achievement";
 
 const data = leaders;
 
@@ -120,6 +124,32 @@ export default function Daily() {
       setGuessesRemaining((guessesRemaining) => guessesRemaining - 1);
 
       setCurrentGuess("");
+      let achievements = loadAchievementData().daily;
+      achievements.games += 1;
+      achievements.wins += 1;
+      switch (5 - guessesRemaining + 1) {
+        case 1: {
+          achievements.guessOne += 1;
+          break;
+        }
+        case 2: {
+          achievements.guessTwo += 1;
+          break;
+        }
+        case 3: {
+          achievements.guessThree += 1;
+          break;
+        }
+        case 4: {
+          achievements.guessFour += 1;
+          break;
+        }
+        case 5: {
+          achievements.guessFive += 1;
+          break;
+        }
+      }
+      saveAchievementsData(achievements, loadAchievementData().freePlay);
       return;
     }
 
@@ -132,6 +162,9 @@ export default function Daily() {
         smooth: "easeInOutQuart",
         offset: -50,
       });
+      let achievements = loadAchievementData().daily;
+      achievements.games += 1;
+      saveAchievementsData(achievements, loadAchievementData().freePlay);
     }
     saveUserData(userData.date, guesses, isGameOver);
     setPrevGuesses(guesses);
@@ -175,6 +208,7 @@ export default function Daily() {
             country={answer.nationality}
             image={answer.image}
             link={answer.wikiLink}
+            guessNumber={5 - guessesRemaining}
             gameOver={gameOver}
           />
 
@@ -191,10 +225,40 @@ export default function Daily() {
               setCurrentGuess={handleInputChange}
               errorMessage={errorMessage}
               handleGuess={handleGuess}
+              guessNumber={5 - guessesRemaining}
               gameOver={gameOver}
             />
 
             {displayGuessResultsRow()}
+            <Achievement
+              gameOver={gameOver}
+              // barData={loadAchievementData().daily}
+              data={loadAchievementData().daily}
+              marginTop={rem(80)}
+            />
+            {/* <PieChart
+              mt={rem(80)}
+              data={gameData}
+              withLabelsLine
+              labelsPosition="inside"
+              labelsType="percent"
+              withLabels
+              withTooltip
+              tooltipDataSource="segment"
+              mx="auto"
+              hidden={gameOver}
+            />
+            <BarChart
+              h={300}
+              w={rem(800)}
+              // mt={rem(100)}
+              data={testData}
+              dataKey="numberOfGuesses"
+              orientation="vertical"
+              yAxisProps={{ width: 80 }}
+              series={[{ name: "Games", color: "violet.6" }]}
+              hidden={gameOver}
+            /> */}
           </Flex>
         </Flex>
       )}

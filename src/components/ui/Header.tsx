@@ -15,16 +15,20 @@ import styles from "@/components/styles/Header.module.css";
 import Link from "next/link";
 import {
   IconHelpOctagon,
+  IconLaurelWreath,
   IconSettings,
   IconSettings2,
   IconTool,
 } from "@tabler/icons-react";
 import { useHardMode } from "@/contexts/HardModeContext";
 import React from "react";
+import Achievement from "./Achievement";
+import { loadAchievementData } from "@/lib/utils";
 
 export default function Header() {
   const [tutorialOpened, handleTutorialModal] = useDisclosure(false);
   const [settingsOpened, handleSettingsModal] = useDisclosure(false);
+  const [achievementOpened, handleAchievementModal] = useDisclosure(false);
   const { isHardMode, toggleHardMode } = useHardMode();
   // const colorScheme = useColorScheme();
   const { toggleColorScheme, setColorScheme, clearColorScheme, colorScheme } =
@@ -66,6 +70,15 @@ export default function Header() {
           onClick={handleSettingsModal.open}
         >
           <IconSettings size={"lg"} />
+        </ActionIcon>
+        <ActionIcon
+          variant="transparent"
+          // color="black"
+          size={"lg"}
+          // onClick={open}
+          onClick={handleAchievementModal.open}
+        >
+          <IconLaurelWreath size={"lg"} />
         </ActionIcon>
       </Flex>
       <Modal opened={settingsOpened} onClose={handleSettingsModal.close}>
@@ -113,6 +126,28 @@ export default function Header() {
             Yellow - Almost Correct (For when your guess the correct century but
             the real answer is only one of the two or part of two) <br />
           </Text>
+        </Flex>
+      </Modal>
+      <Modal
+        opened={achievementOpened}
+        onClose={handleAchievementModal.close}
+        size={"xl"}
+      >
+        <Flex direction={"column"} align={"center"}>
+          <Title order={2}>Daily</Title>
+          <Achievement
+            gameOver={true}
+            data={loadAchievementData().daily}
+            marginTop={rem(20)}
+          />
+          <Title order={2} mt={rem(50)}>
+            FreePlay
+          </Title>
+          <Achievement
+            gameOver={true}
+            data={loadAchievementData().freePlay}
+            marginTop={rem(20)}
+          />
         </Flex>
       </Modal>
     </>
