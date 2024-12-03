@@ -266,6 +266,7 @@ export default function FreePlay() {
               setCurrentGuess={handleInputChange}
               handleGuess={handleGuess}
               errorMessage={errorMessage}
+              guessNumber={5 - gameState.guessesRemaining}
               gameOver={gameOver}
             />
 

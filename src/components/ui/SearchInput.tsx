@@ -4,8 +4,10 @@ import { leaders } from "@/lib/data";
 import {
   ActionIcon,
   Autocomplete,
+  Flex,
   rem,
   stylesToString,
+  Text,
   UnstyledButton,
 } from "@mantine/core";
 import React from "react";
@@ -17,18 +19,21 @@ export default function SearchInput({
   setCurrentGuess,
   handleGuess,
   errorMessage,
+  guessNumber,
   gameOver,
 }: {
   currentGuess: string;
   setCurrentGuess: any;
   handleGuess: any;
   errorMessage: string;
+  guessNumber: number;
   gameOver: boolean;
 }) {
   const { isHardMode } = useHardMode();
 
   return (
     <>
+      {/* <Flex w={"100%"} justify={"center"} gap={}> */}
       <Autocomplete
         w={{ base: "95%", lg: "70%" }}
         size="lg"
@@ -43,7 +48,7 @@ export default function SearchInput({
               w={rem(320)}
               h={"100%"}
             >
-              Search
+              <Text>{`Search (${guessNumber}/5)`}</Text>
             </UnstyledButton>
           </>
         }
@@ -61,6 +66,8 @@ export default function SearchInput({
           },
         }}
       />
+      {/* <Text>Test</Text>
+      </Flex> */}
     </>
   );
 }

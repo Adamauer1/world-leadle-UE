@@ -191,6 +191,7 @@ export default function Daily() {
               setCurrentGuess={handleInputChange}
               errorMessage={errorMessage}
               handleGuess={handleGuess}
+              guessNumber={5 - guessesRemaining}
               gameOver={gameOver}
             />
 
