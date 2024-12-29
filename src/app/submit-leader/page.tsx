@@ -15,6 +15,7 @@ import {
   Container,
   Image,
   RingProgress,
+  Tooltip,
 } from "@mantine/core";
 import { useEffect, useReducer, useRef, useState } from "react";
 import { checkCentury, Leader } from "@/lib/utils";
@@ -24,6 +25,13 @@ import LeaderFrame from "@/components/ui/LeaderFrame";
 import GuessRow from "@/components/ui/GuessRow";
 import React from "react";
 import { useForm } from "@mantine/form";
+import {
+  Icon123,
+  IconHelpOctagon,
+  IconInfoHexagon,
+  IconQuestionMark,
+  IconQuote,
+} from "@tabler/icons-react";
 
 export default function SubmitLeader() {
   const [isLoading, setIsLoading] = useState(false);
@@ -88,11 +96,11 @@ export default function SubmitLeader() {
   };
 
   let leader = {
-    name: previewValues?.name,
-    title: previewValues?.title,
-    nationality: previewValues?.country,
-    continent: previewValues?.region,
-    century: previewValues?.century,
+    name: previewValues?.name || "George Washington",
+    title: previewValues?.title || "President",
+    nationality: previewValues?.country || "United States of America",
+    continent: previewValues?.region || "North America",
+    century: previewValues?.century || "18",
   };
 
   const handleTest = (value: boolean) => {
@@ -118,7 +126,7 @@ export default function SubmitLeader() {
               justify={"space-around"}
               align={"center"}
               flex={1}
-              pt={{ lg: rem(60) }}
+              // pt={{ lg: rem(10) }}
               w={"100%"}
             >
               <Flex direction={"column"}>
@@ -162,8 +170,14 @@ export default function SubmitLeader() {
               <Flex direction={"column"} w={rem(600)}>
                 <form onSubmit={form.onSubmit(handleSubmit)}>
                   <TextInput
-                    label="Name"
-                    placeholder="George Washington"
+                    label=<>
+                      <Flex direction={"row"} gap={4} align={"center"}>
+                        <Text>Full Name</Text>
+                        <Tooltip label="The full name of the leader. E.g. George Washington">
+                          <IconHelpOctagon size={18} />
+                        </Tooltip>
+                      </Flex>
+                    </>
                     {...form.getInputProps("name")}
                     classNames={{
                       input: styles.input,
@@ -171,8 +185,14 @@ export default function SubmitLeader() {
                     }}
                   />
                   <TextInput
-                    label="Title"
-                    placeholder="President"
+                    label=<>
+                      <Flex direction={"row"} gap={4} align={"center"}>
+                        <Text>Title</Text>
+                        <Tooltip label="The highest title the leader held. E.g. President">
+                          <IconHelpOctagon size={18} />
+                        </Tooltip>
+                      </Flex>
+                    </>
                     {...form.getInputProps("title")}
                     classNames={{
                       input: styles.input,
@@ -180,8 +200,14 @@ export default function SubmitLeader() {
                     }}
                   />
                   <TextInput
-                    label="Country"
-                    placeholder="United States of America"
+                    label=<>
+                      <Flex direction={"row"} gap={4} align={"center"}>
+                        <Text>Country</Text>
+                        <Tooltip label="The name of the country the leader lead. E.g. United States of America">
+                          <IconHelpOctagon size={18} />
+                        </Tooltip>
+                      </Flex>
+                    </>
                     {...form.getInputProps("country")}
                     classNames={{
                       input: styles.input,
@@ -189,8 +215,14 @@ export default function SubmitLeader() {
                     }}
                   />
                   <TextInput
-                    label="Region"
-                    placeholder="North America"
+                    label=<>
+                      <Flex direction={"row"} gap={4} align={"center"}>
+                        <Text>Region</Text>
+                        <Tooltip label="The region the country is in. E.g. North America">
+                          <IconHelpOctagon size={18} />
+                        </Tooltip>
+                      </Flex>
+                    </>
                     {...form.getInputProps("region")}
                     classNames={{
                       input: styles.input,
@@ -198,8 +230,14 @@ export default function SubmitLeader() {
                     }}
                   />
                   <TextInput
-                    label="Century"
-                    placeholder="18"
+                    label=<>
+                      <Flex direction={"row"} gap={4} align={"center"}>
+                        <Text>Century</Text>
+                        <Tooltip label="The centuries that the leader lead in. E.g. 18 or for double 18,19">
+                          <IconHelpOctagon size={18} />
+                        </Tooltip>
+                      </Flex>
+                    </>
                     {...form.getInputProps("century")}
                     classNames={{
                       input: styles.input,
@@ -207,8 +245,14 @@ export default function SubmitLeader() {
                     }}
                   />
                   <TextInput
-                    label="Image Link"
-                    placeholder="https://upload.wikimedia.org/wikipedia/commons/b/b6/Gilbert_Stuart_Williamstown_Portrait_of_George_Washington.jpg"
+                    label=<>
+                      <Flex direction={"row"} gap={4} align={"center"}>
+                        <Text>Image Link</Text>
+                        <Tooltip label="The web url to an image of the leader. E.g. Use the wikipedia image url.">
+                          <IconHelpOctagon size={18} />
+                        </Tooltip>
+                      </Flex>
+                    </>
                     {...form.getInputProps("imageLink")}
                     classNames={{
                       input: styles.input,
@@ -216,8 +260,14 @@ export default function SubmitLeader() {
                     }}
                   />
                   <TextInput
-                    label="Wikipedia Link"
-                    placeholder="https://en.wikipedia.org/wiki/George_Washington"
+                    label=<>
+                      <Flex direction={"row"} gap={4} align={"center"}>
+                        <Text>Wikipedia Link</Text>
+                        <Tooltip label="The wikipedia url to the leaders page.">
+                          <IconHelpOctagon size={18} />
+                        </Tooltip>
+                      </Flex>
+                    </>
                     {...form.getInputProps("wikiLink")}
                     classNames={{
                       input: styles.input,
@@ -236,17 +286,23 @@ export default function SubmitLeader() {
             <Flex
               direction={{ base: "column" }}
               // justify={"space-around"}
-              gap={rem(30)}
+              // gap={rem(30)}
               align={"center"}
               flex={1}
-              pt={{ lg: rem(60) }}
+              // pt={{ lg: rem(60) }}
               w={"100%"}
             >
               <Flex direction={"column"} w={rem(600)}>
                 <form onSubmit={form.onSubmit(handleSubmit)}>
                   <TextInput
-                    label="Name"
-                    placeholder="George Washington"
+                    label=<>
+                      <Flex direction={"row"} gap={4} align={"center"}>
+                        <Text>Full Name</Text>
+                        <Tooltip label="The full name of the leader. E.g. George Washington">
+                          <IconHelpOctagon size={18} />
+                        </Tooltip>
+                      </Flex>
+                    </>
                     {...form.getInputProps("name")}
                     classNames={{
                       input: styles.input,
@@ -254,8 +310,14 @@ export default function SubmitLeader() {
                     }}
                   />
                   <TextInput
-                    label="Title"
-                    placeholder="President"
+                    label=<>
+                      <Flex direction={"row"} gap={4} align={"center"}>
+                        <Text>Title</Text>
+                        <Tooltip label="The highest title the leader held. E.g. President">
+                          <IconHelpOctagon size={18} />
+                        </Tooltip>
+                      </Flex>
+                    </>
                     {...form.getInputProps("title")}
                     classNames={{
                       input: styles.input,
@@ -263,8 +325,14 @@ export default function SubmitLeader() {
                     }}
                   />
                   <TextInput
-                    label="Country"
-                    placeholder="United States of America"
+                    label=<>
+                      <Flex direction={"row"} gap={4} align={"center"}>
+                        <Text>Country</Text>
+                        <Tooltip label="The name of the country the leader lead. E.g. United States of America">
+                          <IconHelpOctagon size={18} />
+                        </Tooltip>
+                      </Flex>
+                    </>
                     {...form.getInputProps("country")}
                     classNames={{
                       input: styles.input,
@@ -272,8 +340,14 @@ export default function SubmitLeader() {
                     }}
                   />
                   <TextInput
-                    label="Region"
-                    placeholder="North America"
+                    label=<>
+                      <Flex direction={"row"} gap={4} align={"center"}>
+                        <Text>Region</Text>
+                        <Tooltip label="The region the country is in. E.g. North America">
+                          <IconHelpOctagon size={18} />
+                        </Tooltip>
+                      </Flex>
+                    </>
                     {...form.getInputProps("region")}
                     classNames={{
                       input: styles.input,
@@ -281,8 +355,14 @@ export default function SubmitLeader() {
                     }}
                   />
                   <TextInput
-                    label="Century"
-                    placeholder="18"
+                    label=<>
+                      <Flex direction={"row"} gap={4} align={"center"}>
+                        <Text>Century</Text>
+                        <Tooltip label="The centuries that the leader lead in. E.g. 18 or for double 18,19">
+                          <IconHelpOctagon size={18} />
+                        </Tooltip>
+                      </Flex>
+                    </>
                     {...form.getInputProps("century")}
                     classNames={{
                       input: styles.input,
@@ -290,8 +370,14 @@ export default function SubmitLeader() {
                     }}
                   />
                   <TextInput
-                    label="Image Link"
-                    placeholder="https://upload.wikimedia.org/wikipedia/commons/b/b6/Gilbert_Stuart_Williamstown_Portrait_of_George_Washington.jpg"
+                    label=<>
+                      <Flex direction={"row"} gap={4} align={"center"}>
+                        <Text>Image Link</Text>
+                        <Tooltip label="The web url to an image of the leader. E.g. Use the wikipedia image url.">
+                          <IconHelpOctagon size={18} />
+                        </Tooltip>
+                      </Flex>
+                    </>
                     {...form.getInputProps("imageLink")}
                     classNames={{
                       input: styles.input,
@@ -299,8 +385,14 @@ export default function SubmitLeader() {
                     }}
                   />
                   <TextInput
-                    label="Wikipedia Link"
-                    placeholder="https://en.wikipedia.org/wiki/George_Washington"
+                    label=<>
+                      <Flex direction={"row"} gap={4} align={"center"}>
+                        <Text>Wikipedia Link</Text>
+                        <Tooltip label="The wikipedia url to the leaders page.">
+                          <IconHelpOctagon size={18} />
+                        </Tooltip>
+                      </Flex>
+                    </>
                     {...form.getInputProps("wikiLink")}
                     classNames={{
                       input: styles.input,
