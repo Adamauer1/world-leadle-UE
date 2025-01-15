@@ -25,6 +25,7 @@ import LeaderFrame from "@/components/ui/LeaderFrame";
 import GuessRow from "@/components/ui/GuessRow";
 import React from "react";
 import { useForm } from "@mantine/form";
+import { notifications } from "@mantine/notifications";
 import {
   Icon123,
   IconHelpOctagon,
@@ -38,6 +39,7 @@ export default function SubmitLeader() {
   const [test, setTest] = useState(false);
   const [value, setValue] = useState(0);
   const [previewValues, setPreviewValues] = useState<formValues>();
+  // const [visible, toggle] = useDisclosure();
   const form = useForm({
     mode: "uncontrolled",
     initialValues: {
@@ -93,6 +95,19 @@ export default function SubmitLeader() {
 
   const handleSubmit = (value: any) => {
     console.log("successful submission");
+    //toggle.open();
+    notifications.show({
+      title: "Submitted",
+      message: "Successful submission",
+      color: "green",
+      position: "top-center",
+      styles: {
+        root: { backgroundColor: "green" },
+        description: { color: "white" },
+        title: { color: "white" },
+      },
+    });
+    //form.reset();
   };
 
   let leader = {
@@ -417,4 +432,7 @@ export default function SubmitLeader() {
       )}
     </>
   );
+}
+function useDisclosure(): [any, any] {
+  throw new Error("Function not implemented.");
 }
